@@ -10,7 +10,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane opacity="0.86" prefHeight="549.0" prefWidth="457.0" style="-fx-background-color: #DCE2F0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginFormController">
    <children>
       <Label layoutX="33.0" layoutY="11.0" prefHeight="55.0" prefWidth="324.0" text="LOGIN TO LIVE CHAT ROOM" textFill="#170c6b">
@@ -32,8 +31,8 @@
             <Image url="@../assets/img/pngwing.com%20(14).png" />
          </image>
       </ImageView>
-      <TextField fx:id="txtloginName" layoutX="33.0" layoutY="442.0" prefHeight="40.0" prefWidth="283.0" promptText="Enter Your Name..." />
-      <JFXButton buttonType="RAISED" layoutX="325.0" layoutY="442.0" onAction="#loginOnAction" prefHeight="40.0" prefWidth="86.0" style="-fx-background-color: #08294D;" text="Login" textFill="WHITE">
+      <TextField fx:id="txtloginName" layoutX="40.0" layoutY="442.0" prefHeight="40.0" prefWidth="283.0" promptText="Enter Your Name..." style="-fx-background-color: #FBFBFB; -fx-background-radius: 5; -fx-font-size: 16px; -fx-border-color: #041A59; -fx-border-width: 2px; -fx-font-weight: bold;" />
+      <JFXButton buttonType="RAISED" layoutX="333.0" layoutY="442.0" onAction="#loginOnAction" prefHeight="41.0" prefWidth="86.0" style="-fx-background-color: #08294D;" text="Login" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
