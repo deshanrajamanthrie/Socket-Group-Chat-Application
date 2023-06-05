@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class ClientHandler {
+public class ClientHandler extends Thread {
     private ArrayList <ClientHandler>clients;
     private Socket socket;
     private BufferedReader reader;
@@ -15,7 +15,8 @@ public class ClientHandler {
         try {
             this.socket=socket;
             this.clients=clients;     //Include the clients in to the [Array List ArrayList<ClientHandler> clients]
-            this.reader=new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            this.reader=new BufferedReader(new InputStreamReader(socket.getInputStream()));   //read the input msg
+            this.writer=new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (Throwable e) {
             e.printStackTrace();
         }
