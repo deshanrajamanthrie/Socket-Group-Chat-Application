@@ -10,9 +10,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane opacity="0.86" prefHeight="549.0" prefWidth="457.0" style="-fx-background-color: #DCE2F0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginFormController">
+<AnchorPane fx:id="loginContext" opacity="0.86" prefHeight="549.0" prefWidth="457.0" style="-fx-background-color: #DCE2F0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginFormController">
    <children>
-      <Label layoutX="33.0" layoutY="11.0" prefHeight="55.0" prefWidth="324.0" text="LOGIN TO LIVE CHAT ROOM" textFill="#170c6b">
+      <Label layoutX="33.0" layoutY="11.0" prefHeight="55.0" prefWidth="324.0" text="LOGIN TO LIVE CHAT ROOM" textFill="#0e5363">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="24.0" />
          </font>
