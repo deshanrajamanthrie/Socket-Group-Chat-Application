@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -75,6 +76,22 @@ public class ChatViewController extends Thread {
                     HBox hBox = new HBox(12);
                     hBox.setAlignment(Pos.BOTTOM_RIGHT);
 
+                    if (!s.equalsIgnoreCase(lblName.getText())) {
+                        vBox.setAlignment(Pos.TOP_LEFT);
+                        hBox.setAlignment(Pos.CENTER_LEFT);
+
+                        Text text1 = new Text("" + s + " :");
+                        hBox.getChildren().add(text1);
+                        hBox.getChildren().add(imageView);
+
+                    } else {
+                        hBox.setAlignment(Pos.BOTTOM_RIGHT);
+                        hBox.getChildren().add(imageView);
+
+                        Text text2 = new Text(" : Me");
+                        hBox.getChildren().add(text2);
+                    }
+                    Platform.runLater(() -> vBox.getChildren().addAll(hBox));
 
                 }
             } catch (IOException e) {
