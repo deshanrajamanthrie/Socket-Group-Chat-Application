@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 import java.io.*;
 import java.net.Socket;
@@ -42,8 +43,9 @@ public class ChatViewController extends Thread {
     }
 
     public void run() {
-        while (true) {
-            try {
+        try {
+            while (true) {
+
                 String msg = reader.readLine();
                 String[] split = msg.split("");   //Split can return 0 length  string array
                 String s = split[0];    //Index 0 array
@@ -92,12 +94,34 @@ public class ChatViewController extends Thread {
                         hBox.getChildren().add(text2);
                     }
                     Platform.runLater(() -> vBox.getChildren().addAll(hBox));
+                } else {
+                    TextFlow tempflow = new TextFlow();
+                    if (!s.equalsIgnoreCase(lblName.getText() + ":")) {
+                        Text txtName = new Text(s + " ");
+                        txtName.getStyleClass().add("txtName");
+                        tempflow.getChildren().add(txtName);
+                    }
+                    tempflow.getChildren().add(text);
+                    tempflow.setMaxWidth(150);
 
+                    TextFlow flow = new TextFlow(tempflow);
+                    HBox hBox1 = new HBox(12);
+
+                    if (!s.equalsIgnoreCase(lblName.getText() + ":")) {
+                        vBox.setAlignment(Pos.TOP_LEFT);
+                        hBox1.setAlignment(Pos.CENTER_LEFT);
+                        hBox1.getChildren().add(flow);
+                    } else {
+                        Text text2 = new Text(completemsg + "Me");
+                        TextFlow flow2 = new TextFlow(text2);
+                        hBox1.setAlignment(Pos.BOTTOM_RIGHT);
+                        hBox1.getChildren().add(flow2);
+                    }
+                    Platform.runLater(() -> vBox.getChildren().add(hBox1));
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
 
