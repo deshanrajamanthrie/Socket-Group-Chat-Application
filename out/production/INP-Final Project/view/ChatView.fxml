@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ChatViewController">
+<AnchorPane fx:id="chatViewcontext" prefHeight="700.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ChatViewController">
    <children>
       <Separator layoutY="63.0" prefHeight="12.0" prefWidth="484.0" />
       <AnchorPane prefHeight="67.0" prefWidth="489.0" style="-fx-background-color: #008F81;">
