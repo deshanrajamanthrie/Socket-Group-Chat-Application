@@ -18,8 +18,6 @@ public class Client_01  extends Application {
        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/LoginForm.fxml"))));
        primaryStage.show();
        primaryStage.centerOnScreen();
-       primaryStage.setTitle(" Client Login Form");
-
-
+       primaryStage.setTitle("Client Login Form");
     }
 }

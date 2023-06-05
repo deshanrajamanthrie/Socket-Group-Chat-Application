@@ -4,12 +4,20 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 public class ChatViewController {
     public Label lblName;
     public TextField txtmsgtype;
     public VBox vBox;
+    public AnchorPane chatViewcontext;
+
+
+
+    public  void initialize(){
+
+    }
 
     public void sendOnAction(ActionEvent actionEvent) {
     }
