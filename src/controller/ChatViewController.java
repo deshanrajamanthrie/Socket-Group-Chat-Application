@@ -15,5 +15,6 @@ public class ChatViewController {
     }
 
     public void imageSendOnMouseclicked(MouseEvent mouseEvent) {
+
     }
 }

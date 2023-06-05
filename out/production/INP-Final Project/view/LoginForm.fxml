@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane opacity="0.86" prefHeight="549.0" prefWidth="457.0" style="-fx-background-color: #DCE2F0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginFormController">
+   <children>
+      <Label layoutX="33.0" layoutY="11.0" prefHeight="55.0" prefWidth="324.0" text="LOGIN TO LIVE CHAT ROOM" textFill="#170c6b">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="24.0" />
+         </font>
+      </Label>
+      <Line endX="336.0" endY="-8.0" layoutX="115.0" layoutY="14.0" startX="-108.5" startY="-8.0" stroke="#0b98d0" strokeWidth="2.0" />
+      <Line endX="327.5" endY="518.5" layoutX="125.0" layoutY="24.0" startX="326.5" startY="-17.5" stroke="#0b98d0" strokeWidth="2.0" />
+      <Line endX="338.0" layoutX="114.0" layoutY="543.0" startX="-107.0" stroke="#0b98d0" strokeWidth="2.0" />
+      <Line endX="-107.5" endY="310.5" layoutX="114.0" layoutY="232.0" startX="-108.0" startY="-225.5" stroke="#0b98d0" strokeWidth="2.0" />
+      <ImageView fitHeight="69.0" fitWidth="49.0" layoutX="394.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/img/meetme.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="221.0" fitWidth="233.0" layoutX="130.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/img/pngwing.com%20(14).png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txtloginName" layoutX="40.0" layoutY="442.0" prefHeight="40.0" prefWidth="283.0" promptText="Enter Your Name..." style="-fx-background-color: #FBFBFB; -fx-background-radius: 5; -fx-font-size: 16px; -fx-border-color: #041A59; -fx-border-width: 2px; -fx-font-weight: bold;" />
+      <JFXButton buttonType="RAISED" layoutX="333.0" layoutY="442.0" onAction="#loginOnAction" prefHeight="41.0" prefWidth="86.0" style="-fx-background-color: #08294D;" text="Login" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+   </children>
+</AnchorPane>
