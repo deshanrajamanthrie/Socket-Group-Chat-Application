@@ -78,7 +78,7 @@ public class ChatViewController extends Thread {
                     File file = new File(st);
                     Image image = new Image(file.toURI().toString());
 
-                    ImageView imageView = new ImageView(image);
+                    ImageView imageView = new ImageView(image);   //set Image Set
                     imageView.setFitHeight(150);
                     imageView.setFitWidth(200);
 
@@ -144,7 +144,7 @@ public class ChatViewController extends Thread {
 
     }
 
-    private void sendMessage() {
+    private void sendMessage() {   //button Send On Action
         String typemsg = txtmsgtype.getText();
        /* System.out.println("Msg Type :" + typemsg);*/
         writer.println(lblName.getText() + ": " + txtmsgtype.getText());
@@ -154,7 +154,7 @@ public class ChatViewController extends Thread {
         }
     }
 
-    public void imageSendOnMouseclicked(MouseEvent mouseEvent) {
+    public void imageSendOnMouseclicked(MouseEvent mouseEvent) {  //Image share
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         fileChooser = new FileChooser();
         fileChooser.setTitle("Open Image");
