@@ -62,13 +62,13 @@ public class ChatViewController extends Thread {
                     completemsg.append(tokens[i] + " ");
                 }
 
-                String[] split1 = msg.split("");
-                String st = "";
+                String[] split1 = msg.split(" ");
+                String st = " ";
                 for (int i = 0; i < split1.length - 1; i++) {
                     st += split1[i + 1] + " ";
                 }
                 Text text = new Text(st);
-                String firstChars = " ";
+                String firstChars = "";
                 if (st.length() > 3) {
                     firstChars = st.substring(0, 3);
                 }
@@ -91,7 +91,7 @@ public class ChatViewController extends Thread {
                         vBox.setAlignment(Pos.TOP_LEFT);
                         hBox.setAlignment(Pos.CENTER_LEFT);
 
-                        Text text1 = new Text("  " + cmd + " :");
+                        Text text1 = new Text(" "+cmd+ " :");
                         hBox.getChildren().add(text1);
                         hBox.getChildren().add(imageView);
 
@@ -100,6 +100,7 @@ public class ChatViewController extends Thread {
                         hBox.getChildren().add(imageView);
 
                         Text text2 = new Text(": Me");
+
                         hBox.getChildren().add(text2);
                     }
                     Platform.runLater(() -> vBox.getChildren().addAll(hBox));
@@ -116,19 +117,19 @@ public class ChatViewController extends Thread {
                     tempflow.setMaxWidth(200);
 
                     TextFlow flow = new TextFlow(tempflow);
-                    HBox hBox1 = new HBox(12);
+                    HBox hBox = new HBox(12);//
 
                     if (!cmd.equalsIgnoreCase(lblName.getText() + ":")) {
                         vBox.setAlignment(Pos.TOP_LEFT);
-                        hBox1.setAlignment(Pos.CENTER_LEFT);
-                        hBox1.getChildren().add(flow);
+                        hBox.setAlignment(Pos.CENTER_LEFT);
+                        hBox.getChildren().add(flow);
                     } else {
                         Text text2 = new Text(completemsg + ":Me");
                         TextFlow flow2 = new TextFlow(text2);
-                        hBox1.setAlignment(Pos.BOTTOM_RIGHT);
-                        hBox1.getChildren().add(flow2);
+                        hBox.setAlignment(Pos.BOTTOM_RIGHT);
+                        hBox.getChildren().add(flow2);
                     }
-                    Platform.runLater(() -> vBox.getChildren().add(hBox1));
+                    Platform.runLater(() -> vBox.getChildren().add(hBox));
                 }
             }
         } catch (IOException e) {
@@ -148,7 +149,7 @@ public class ChatViewController extends Thread {
        /* System.out.println("Msg Type :" + typemsg);*/
         writer.println(lblName.getText() + ": " + txtmsgtype.getText());
         txtmsgtype.clear();
-        if (typemsg.equalsIgnoreCase("Bye".toLowerCase(Locale.ROOT))) {
+        if (typemsg.equalsIgnoreCase("Bye")) {
             System.exit(0);
         }
     }
