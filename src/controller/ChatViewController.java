@@ -78,7 +78,8 @@ public class ChatViewController extends Thread {
                     File file = new File(st);
                     Image image = new Image(file.toURI().toString());
 
-                    ImageView imageView = new ImageView(image);   //set Image Set
+                    ImageView imageView = new ImageView(image);//set Image Set
+                    //Image View Set Width and Height
                     imageView.setFitHeight(150);
                     imageView.setFitWidth(200);
 
