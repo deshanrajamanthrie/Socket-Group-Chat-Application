@@ -21,15 +21,15 @@ public class LoginFormController {
 
     public void loginOnAction(ActionEvent actionEvent) throws IOException {
         userName = txtloginName.getText();
-        if (userName == "") {
+        if (userName.equals("")) {
             new Alert(Alert.AlertType.INFORMATION, "Login Failed,Please Enter Correct User Name").show();
         } else {
-            Stage stage = (Stage) loginContext.getScene().getWindow();
-            scene = new Scene((FXMLLoader.load(getClass().getResource("../view/ChatView.fxml"))));
-            stage.setScene(scene);
-            scene.setFill(Color.TRANSPARENT);
+            Stage stage = (Stage) txtloginName.getScene().getWindow();
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/ChatView.fxml"))));
+            stage.centerOnScreen();
             stage.setTitle(userName);
             stage.show();
+
 
         }
     }

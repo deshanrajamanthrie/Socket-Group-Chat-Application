@@ -26,7 +26,7 @@ public class ClientHandler extends Thread {
         try {
             String msg;
             while ((msg = reader.readLine()) != null) {
-                if (msg.equalsIgnoreCase("finished")) {
+                if (msg.equalsIgnoreCase("exit")) {
                     break;
                 }
                 for (ClientHandler cl : clients) {

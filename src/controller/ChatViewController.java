@@ -3,6 +3,7 @@ package controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -13,9 +14,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Locale;
 
 public class ChatViewController extends Thread {
     public Label lblName;
@@ -24,44 +28,47 @@ public class ChatViewController extends Thread {
     public AnchorPane chatViewcontext;
     private Socket socket;
     private BufferedReader reader;
-    private PrintWriter writer;
+    private FileChooser fileChooser;
+    private File filePath;
+    PrintWriter writer;
 
 
     public void initialize() {
 
         String userName = LoginFormController.userName;    //lbl to set the user Name
-        lblName.setText(userName);
+        lblName.setText(String.valueOf(userName));
         try {
             socket = new Socket("localhost", 5001);
             System.out.println("Local Socket is connected with  Main Server!");
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter writer = new PrintWriter(socket.getOutputStream());
-            writer.flush();
+            writer = new PrintWriter(socket.getOutputStream(), true);
+            this.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    @Override
     public void run() {
         try {
             while (true) {
 
                 String msg = reader.readLine();
-                String[] split = msg.split("");   //Split can return 0 length  string array
-                String s = split[0];    //Index 0 array
+                String[] tokens = msg.split(" ");   //Split can return 0 length  string array
+                String cmd = tokens[0];    //Index 0 array
 
                 StringBuilder completemsg = new StringBuilder();    //these method can  be reprsesent capacity in maseges and initial capacity is 16
-                for (int i = 0; i < s.length(); i++) {
-                    completemsg.append(split[i] + "");
+                for (int i = 1; i < tokens.length; i++) {
+                    completemsg.append(tokens[i] + " ");
                 }
 
                 String[] split1 = msg.split("");
                 String st = "";
-                for (int i = 0; i < split1.length; i++) {
-                    st += split1[i + 1] + "";
+                for (int i = 0; i < split1.length - 1; i++) {
+                    st += split1[i + 1] + " ";
                 }
                 Text text = new Text(st);
-                String firstChars = "";
+                String firstChars = " ";
                 if (st.length() > 3) {
                     firstChars = st.substring(0, 3);
                 }
@@ -72,17 +79,19 @@ public class ChatViewController extends Thread {
                     Image image = new Image(file.toURI().toString());
 
                     ImageView imageView = new ImageView(image);
-                    imageView.setFitWidth(150);
-                    imageView.setFitHeight(100);
+                    imageView.setFitHeight(150);
+                    imageView.setFitWidth(200);
 
-                    HBox hBox = new HBox(12);
+
+                    HBox hBox = new HBox(10);
                     hBox.setAlignment(Pos.BOTTOM_RIGHT);
 
-                    if (!s.equalsIgnoreCase(lblName.getText())) {
+                    if (!cmd.equalsIgnoreCase(lblName.getText())) {
+
                         vBox.setAlignment(Pos.TOP_LEFT);
                         hBox.setAlignment(Pos.CENTER_LEFT);
 
-                        Text text1 = new Text("" + s + " :");
+                        Text text1 = new Text("  " + cmd + " :");
                         hBox.getChildren().add(text1);
                         hBox.getChildren().add(imageView);
 
@@ -90,29 +99,31 @@ public class ChatViewController extends Thread {
                         hBox.setAlignment(Pos.BOTTOM_RIGHT);
                         hBox.getChildren().add(imageView);
 
-                        Text text2 = new Text(" : Me");
+                        Text text2 = new Text(": Me");
                         hBox.getChildren().add(text2);
                     }
                     Platform.runLater(() -> vBox.getChildren().addAll(hBox));
                 } else {
+
                     TextFlow tempflow = new TextFlow();
-                    if (!s.equalsIgnoreCase(lblName.getText() + ":")) {
-                        Text txtName = new Text(s + " ");
+
+                    if (!cmd.equalsIgnoreCase(lblName.getText() + ":")) {
+                        Text txtName = new Text(cmd + " ");
                         txtName.getStyleClass().add("txtName");
                         tempflow.getChildren().add(txtName);
                     }
                     tempflow.getChildren().add(text);
-                    tempflow.setMaxWidth(150);
+                    tempflow.setMaxWidth(200);
 
                     TextFlow flow = new TextFlow(tempflow);
                     HBox hBox1 = new HBox(12);
 
-                    if (!s.equalsIgnoreCase(lblName.getText() + ":")) {
+                    if (!cmd.equalsIgnoreCase(lblName.getText() + ":")) {
                         vBox.setAlignment(Pos.TOP_LEFT);
                         hBox1.setAlignment(Pos.CENTER_LEFT);
                         hBox1.getChildren().add(flow);
                     } else {
-                        Text text2 = new Text(completemsg + "Me");
+                        Text text2 = new Text(completemsg + ":Me");
                         TextFlow flow2 = new TextFlow(text2);
                         hBox1.setAlignment(Pos.BOTTOM_RIGHT);
                         hBox1.getChildren().add(flow2);
@@ -124,14 +135,30 @@ public class ChatViewController extends Thread {
             e.printStackTrace();
         }
 
-
     }
 
     public void sendOnAction(ActionEvent actionEvent) {
+        sendMessage();
+
 
     }
 
+    private void sendMessage() {
+        String typemsg = txtmsgtype.getText();
+       /* System.out.println("Msg Type :" + typemsg);*/
+        writer.println(lblName.getText() + ": " + txtmsgtype.getText());
+        txtmsgtype.clear();
+        if (typemsg.equalsIgnoreCase("Bye".toLowerCase(Locale.ROOT))) {
+            System.exit(0);
+        }
+    }
+
     public void imageSendOnMouseclicked(MouseEvent mouseEvent) {
+        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Image");
+        this.filePath = fileChooser.showOpenDialog(stage);
+        writer.println(lblName.getText() + " " + "img" + filePath.getPath());
 
     }
 }
